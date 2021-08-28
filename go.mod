@@ -2,6 +2,8 @@ module git.nova-vps.ml/lexisother/GitFren
 
 go 1.17
 
+replace github.com/20kdc/CCUpdaterUI/middle => ./middle
+
 require (
 	github.com/20kdc/CCUpdaterUI v0.0.0-20210313044331-b5003a3949b9 // indirect
 	github.com/20kdc/go-vkv v0.0.0-20191224143813-9318077c06cf // indirect

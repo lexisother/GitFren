@@ -59,7 +59,7 @@ func main() {
 	frenyard.TargetFrameTime = 0.016
 	slideContainer := framework.NewUISlideTransitionContainerPtr(nil)
 	slideContainer.FyEResize(design.SizeWindowInit)
-	wnd, err := framework.CreateBoundWindow("CCUpdaterUI", true, design.ThemeBackground, slideContainer)
+	wnd, err := framework.CreateBoundWindow("GitFren", true, design.ThemeBackground, slideContainer)
 	if err != nil {
 		panic(err)
 	}
@@ -71,9 +71,9 @@ func main() {
 		mainContainer: slideContainer,
 		window: wnd,
 		upQueued: make(chan func(), 16),
-		teleportSettings: framework.SlideTransition{
-		},
+		teleportSettings: framework.SlideTransition{},
 	})
+	app.ShowPrimaryView()
 	// Started!
 	frenyard.GlobalBackend.Run(func(frameTime float64) {
 		select {
