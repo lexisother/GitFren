@@ -1,36 +1,17 @@
+/*
+ * CCUpdaterUI/middle
+ * Written starting in 2019 by 20kdc
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see <https://opensource.org/licenses/MIT>.
+*/
+
+
 package middle
 
 import (
-	"os"
 	"os/exec"
 	"fmt"
-	"path/filepath"
 )
-
-// Launch launches the game given a gameinstance base directory.
-func Launch(base string) (*os.Process, error) {
-	// Try to run the game...
-	executables := []string{
-		// Unixes
-		"run", // Override script
-		"nw", // NW.JS SDK replacement
-		"CrossCode", // Original executable
-		"../../MacOS/nwjs", // Mac OS X executable
-		// Windows
-		"nw.exe", // NW.JS SDK replacement
-		"CrossCode.exe", // Original executable
-	}
-	for _, executable := range executables {
-		fullPath := filepath.Join(base, executable)
-		proc, err := os.StartProcess(fullPath, []string{fullPath}, &os.ProcAttr{
-			Dir: base,
-		})
-		if err == nil {
-			return proc, nil
-		}
-	}
-	return nil, fmt.Errorf("all methods failed")
-}
 
 // OpenURL opens a URL. It *MAY* be susceptible to bad URLs depending on OS.
 func OpenURL(url string) error {
@@ -48,4 +29,3 @@ func OpenURL(url string) error {
 	}
 	return fmt.Errorf("all methods failed")
 }
-

@@ -1,3 +1,10 @@
+/*
+ * CCUpdaterUI/middle
+ * Written starting in 2019 by 20kdc
+ * This work is licensed under the terms of the MIT license.
+ * For a copy, see <https://opensource.org/licenses/MIT>.
+*/
+
 package middle
 
 import (
@@ -9,7 +16,6 @@ import (
 
 // UpdaterConfig is the configuration structure for the application.
 type UpdaterConfig struct {
-	GamePath string `json:"gamePath"`
 	DevMode bool `json:"devMode"`
 }
 
@@ -18,7 +24,7 @@ func getUpdaterConfigPath() string {
 	if err != nil {
 		cfg = ""
 	}
-	return filepath.Join(cfg, "ccmodupdater.json")
+	return filepath.Join(cfg, "gitfren.json")
 }
 
 // ReadUpdaterConfig returns the current configuration for the application.

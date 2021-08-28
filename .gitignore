@@ -9,6 +9,7 @@
 *.dll
 *.so
 *.dylib
+GitFren
 
 # Test binary, built with `go test -c`
 *.test
@@ -24,4 +25,3 @@
 /Godeps/
 
 # End of https://www.toptal.com/developers/gitignore/api/go
-
