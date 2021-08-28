@@ -1,11 +1,11 @@
-package main
+package src
 
 import (
 	"github.com/20kdc/CCUpdaterUI/frenyard/framework"
 	"github.com/20kdc/CCUpdaterUI/design"
 )
 
-func (app *upApplication) ShowPrimaryView() {
+func (app *UpApplication) ShowPrimaryView() {
 	slots := []framework.FlexboxSlot{}
 
 	slots = append(slots, framework.FlexboxSlot{
