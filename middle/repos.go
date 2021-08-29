@@ -1,6 +1,10 @@
 package middle
 
 import (
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
 	"regexp"
 
 	"github.com/anaskhan96/soup"
@@ -23,4 +27,20 @@ func GetRepoNames() []string {
 	}
 
 	return final
+}
+
+func GetRepoData(url string, repoName string) Repository {
+	resp, err := http.Get(url + "/repos/" + repoName)
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+
+	var repo Repository
+	json.Unmarshal([]byte(body), &repo)
+
+	return repo
 }
