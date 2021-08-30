@@ -2,18 +2,22 @@ package src
 
 import (
 	"git.nova-vps.ml/lexisother/GitFren/middle"
+	"git.nova-vps.ml/lexisother/GitFren/middle/api"
 	"github.com/20kdc/CCUpdaterUI/design"
 	"github.com/20kdc/CCUpdaterUI/frenyard/framework"
 )
 
 var baseURL = "https://git.nova-vps.ml/api/v1"
 
-func (app *UpApplication) getPrimaryViewRepoList() []middle.Repository {
-	repos := []middle.Repository{}
-	repoNames := middle.GetRepoNames()
+func (app *UpApplication) getPrimaryViewRepoList() []api.Repository {
+	repos := []api.Repository{}
+	users := middle.GetUserNames()
 
-	for _, name := range repoNames {
-		repos = append(repos, middle.GetRepoData(baseURL, name))
+	for _, name := range users {
+		userRepos := middle.GetUserRepos(baseURL, name)
+		for _, repo := range userRepos {
+			repos = append(repos, repo)
+		}
 	}
 
 	return repos
