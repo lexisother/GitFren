@@ -1,6 +1,8 @@
 package src
 
 import (
+	"fmt"
+
 	"git.nova-vps.ml/lexisother/GitFren/middle"
 	"git.nova-vps.ml/lexisother/GitFren/middle/api"
 	"github.com/20kdc/CCUpdaterUI/design"
@@ -35,8 +37,15 @@ func (app *UpApplication) ShowPrimaryView() {
 	repoListItems := []design.ListItemDetails{}
 	for _, repo := range repoList {
 		localRepo := repo
+		releases := middle.GetReleases(baseURL, repo)
+
+		text := repo.Name
+		if len(releases) > 0 {
+			text = fmt.Sprintf("%s (%s)", repo.Name, releases[0].TagName)
+		}
+
 		repoListItems = append(repoListItems, design.ListItemDetails{
-			Text: repo.Name,
+			Text: text,
 			Subtext: repo.Description,
 			Click: func () {
 				app.GSRightwards()
