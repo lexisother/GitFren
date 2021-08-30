@@ -62,3 +62,20 @@ func GetRepoData(url string, owner string, repoName string) api.Repository {
 
 	return repo
 }
+
+func GetReleases(url string, repo api.Repository) []api.Release {
+	var releases []api.Release
+
+	resp, err := http.Get(fmt.Sprintf("%s/repos/%s/%s/releases", url, repo.Owner.Username, repo.Name))
+	if err != nil {
+		fmt.Println(err)
+	}
+
+	defer resp.Body.Close()
+
+	body, err := io.ReadAll(resp.Body)
+
+	json.Unmarshal([]byte(body), &releases)
+
+	return releases
+}
