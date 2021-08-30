@@ -1,0 +1,24 @@
+kind: pipeline
+name: Dev Release
+trigger:
+  event:
+    - push
+
+steps:
+  - name: Build and Dev Release
+    image: golang:latest
+    environment:
+      GITEA_SERVER_TOKEN:
+        from_secret: API_KEY
+    commands:
+      - apt update
+      - apt install -y wget pkg-config libsdl2-dev
+      - go get -v
+      - go build -v
+      - chmod +x ./GitFren
+      - wget https://dl.gitea.io/tea/master/tea-master-linux-amd64
+      - mv tea-master-linux-amd64 tea
+      - chmod +x ./tea
+      - ./tea logins add --name novagit --url https://git.nova-vps.ml --token "$GITEA_SERVER_TOKEN"
+      - ./tea releases delete -y --repo lexisother/GitFren --login novagit --delete-tag dev dev
+      - ./tea releases create --tag dev --target master --title "Dev Release" --prerelease --asset ./GitFren --repo lexisother/GitFren --login novagit
