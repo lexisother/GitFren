@@ -13,6 +13,7 @@ type UpApplication struct {
   MainContainer *framework.UISlideTransitionContainer
   Window frenyard.Window
   UpQueued chan func()
+	CachedPrimaryView framework.UILayoutElement
   TeleportSettings framework.SlideTransition
 }
 

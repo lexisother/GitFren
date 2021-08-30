@@ -24,6 +24,11 @@ func (app *UpApplication) getPrimaryViewRepoList() []api.Repository {
 }
 
 func (app *UpApplication) ShowPrimaryView() {
+	if app.CachedPrimaryView != nil {
+		app.Teleport(app.CachedPrimaryView)
+		return
+	}
+
 	slots := []framework.FlexboxSlot{}
 
 	repoList := app.getPrimaryViewRepoList()
@@ -36,7 +41,7 @@ func (app *UpApplication) ShowPrimaryView() {
 			Click: func () {
 				app.GSRightwards()
 				app.ShowRepoView(func () {
-					app.GSRightwards()
+					app.GSLeftwards()
 					app.ShowPrimaryView()
 				}, localRepo)
 			},
@@ -48,10 +53,12 @@ func (app *UpApplication) ShowPrimaryView() {
 		Grow: 1,
 	})
 
-	app.Teleport(design.LayoutDocument(design.Header{
-		Title: "GitFren",
+	app.CachedPrimaryView = design.LayoutDocument(design.Header{
+		Title: "Repositories",
 	}, framework.NewUIFlexboxContainerPtr(framework.FlexboxContainer{
 		DirVertical: true,
 		Slots: slots,
-	}), true))
+	}), true)
+
+	app.Teleport(app.CachedPrimaryView)
 }
