@@ -29,9 +29,17 @@ func (app *UpApplication) ShowPrimaryView() {
 	repoList := app.getPrimaryViewRepoList()
 	repoListItems := []design.ListItemDetails{}
 	for _, repo := range repoList {
+		localRepo := repo
 		repoListItems = append(repoListItems, design.ListItemDetails{
 			Text: repo.Name,
 			Subtext: repo.Description,
+			Click: func () {
+				app.GSRightwards()
+				app.ShowRepoView(func () {
+					app.GSRightwards()
+					app.ShowPrimaryView()
+				}, localRepo)
+			},
 		})
 	}
 
